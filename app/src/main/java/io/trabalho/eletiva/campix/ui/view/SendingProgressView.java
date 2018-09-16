@@ -22,9 +22,6 @@ import android.view.animation.OvershootInterpolator;
 
 import io.trabalho.eletiva.campix.R;
 
-/**
- * Created by Miroslaw Stanek on 28.02.15.
- */
 public class SendingProgressView extends View {
     public static final int STATE_NOT_STARTED = 0;
     public static final int STATE_PROGRESS_STARTED = 1;

@@ -17,9 +17,6 @@ import butterknife.BindString;
 import io.trabalho.eletiva.campix.R;
 import io.trabalho.eletiva.campix.ui.utils.CircleTransformation;
 
-/**
- * Created by Miroslaw Stanek on 15.07.15.
- */
 public class BaseDrawerActivity extends BaseActivity {
 
     @BindView(R.id.drawerLayout)

@@ -40,9 +40,6 @@ import io.trabalho.eletiva.campix.Utils;
 import io.trabalho.eletiva.campix.ui.adapter.PhotoFiltersAdapter;
 import io.trabalho.eletiva.campix.ui.view.RevealBackgroundView;
 
-/**
- * Created by Miroslaw Stanek on 08.02.15.
- */
 public class TakePhotoActivity extends BaseActivity implements RevealBackgroundView.OnStateChangeListener,
         CameraHostProvider {
     public static final String ARG_REVEAL_START_LOCATION = "reveal_start_location";

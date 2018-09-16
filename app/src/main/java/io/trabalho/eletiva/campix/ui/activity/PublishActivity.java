@@ -21,9 +21,6 @@ import butterknife.OnCheckedChanged;
 import io.trabalho.eletiva.campix.R;
 import io.trabalho.eletiva.campix.Utils;
 
-/**
- * Created by Miroslaw Stanek on 21.02.15.
- */
 public class PublishActivity extends BaseActivity {
     public static final String ARG_TAKEN_PHOTO_URI = "arg_taken_photo_uri";
 

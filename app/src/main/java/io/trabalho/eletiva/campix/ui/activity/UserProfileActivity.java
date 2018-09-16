@@ -21,9 +21,6 @@ import io.trabalho.eletiva.campix.ui.adapter.UserProfileAdapter;
 import io.trabalho.eletiva.campix.ui.utils.CircleTransformation;
 import io.trabalho.eletiva.campix.ui.view.RevealBackgroundView;
 
-/**
- * Created by Miroslaw Stanek on 14.01.15.
- */
 public class UserProfileActivity extends BaseDrawerActivity implements RevealBackgroundView.OnStateChangeListener {
     public static final String ARG_REVEAL_START_LOCATION = "reveal_start_location";
 

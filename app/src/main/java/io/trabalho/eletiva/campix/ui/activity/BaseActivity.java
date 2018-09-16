@@ -11,9 +11,6 @@ import butterknife.ButterKnife;
 import butterknife.BindView;
 import io.trabalho.eletiva.campix.R;
 
-/**
- * Created by Miroslaw Stanek on 19.01.15.
- */
 public class BaseActivity extends AppCompatActivity {
 
     @Nullable

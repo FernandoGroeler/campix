@@ -15,9 +15,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.trabalho.eletiva.campix.R;
 
-/**
- * Created by Miroslaw Stanek on 09.12.2015.
- */
 public class LoadingFeedItemView extends FrameLayout {
 
     @BindView(R.id.vSendingProgress)
