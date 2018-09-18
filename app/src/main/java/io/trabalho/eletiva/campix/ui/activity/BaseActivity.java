@@ -17,10 +17,6 @@ public class BaseActivity extends AppCompatActivity {
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 
-    @Nullable
-    @BindView(R.id.ivLogo)
-    ImageView ivLogo;
-
     private MenuItem inboxMenuItem;
 
     @Override
@@ -61,7 +57,4 @@ public class BaseActivity extends AppCompatActivity {
         return inboxMenuItem;
     }
 
-    public ImageView getIvLogo() {
-        return ivLogo;
-    }
 }
