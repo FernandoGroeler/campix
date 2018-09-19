@@ -75,6 +75,12 @@ public class SendingProgressView extends View {
         init();
     }
 
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    public SendingProgressView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+        super(context, attrs, defStyleAttr, defStyleRes);
+        init();
+    }
+
     private void init() {
         setupProgressPaint();
         setupDonePaints();
