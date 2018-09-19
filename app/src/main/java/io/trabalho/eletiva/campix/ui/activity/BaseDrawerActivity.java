@@ -29,7 +29,6 @@ public class BaseDrawerActivity extends BaseActivity {
     @BindString(R.string.user_profile_photo)
     String profilePhoto;
 
-    //Cannot be bound via Butterknife, hosting view is initialized later (see setupHeader() method)
     private ImageView ivMenuUserProfilePhoto;
 
     @Override
