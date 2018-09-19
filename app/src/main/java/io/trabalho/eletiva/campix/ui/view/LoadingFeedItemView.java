@@ -39,14 +39,7 @@ public class LoadingFeedItemView extends FrameLayout {
         init();
     }
 
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public LoadingFeedItemView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
-        init();
-    }
-
     private void init() {
-        LayoutInflater.from(getContext()).inflate(R.layout.item_feed_loader, this, true);
         ButterKnife.bind(this);
     }
 
