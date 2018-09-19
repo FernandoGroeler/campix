@@ -31,7 +31,6 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private final List<FeedItem> feedItems = new ArrayList<>();
 
     private Context context;
-    private OnFeedItemClickListener onFeedItemClickListener;
 
     private boolean showLoadingView = false;
 
@@ -59,18 +58,6 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
     private void setupClickableViews(final View view, final CellFeedViewHolder cellFeedViewHolder) {
-        cellFeedViewHolder.btnComments.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onFeedItemClickListener.onCommentsClick(view, cellFeedViewHolder.getAdapterPosition());
-            }
-        });
-        cellFeedViewHolder.btnMore.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onFeedItemClickListener.onMoreClick(v, cellFeedViewHolder.getAdapterPosition());
-            }
-        });
         cellFeedViewHolder.ivFeedCenter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -91,12 +78,6 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 if (context instanceof MainActivity) {
                     ((MainActivity) context).showLikedSnackbar();
                 }
-            }
-        });
-        cellFeedViewHolder.ivUserProfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onFeedItemClickListener.onProfileClick(view);
             }
         });
     }
@@ -153,10 +134,6 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
     }
 
-    public void setOnFeedItemClickListener(OnFeedItemClickListener onFeedItemClickListener) {
-        this.onFeedItemClickListener = onFeedItemClickListener;
-    }
-
     public void showLoadingView() {
         showLoadingView = true;
         notifyItemChanged(0);
@@ -167,20 +144,14 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         ImageView ivFeedCenter;
         @BindView(R.id.ivFeedBottom)
         ImageView ivFeedBottom;
-        @BindView(R.id.btnComments)
-        ImageButton btnComments;
         @BindView(R.id.btnLike)
         ImageButton btnLike;
-        @BindView(R.id.btnMore)
-        ImageButton btnMore;
         @BindView(R.id.vBgLike)
         View vBgLike;
         @BindView(R.id.ivLike)
         ImageView ivLike;
         @BindView(R.id.tsLikesCounter)
         TextSwitcher tsLikesCounter;
-        @BindView(R.id.ivUserProfile)
-        ImageView ivUserProfile;
         @BindView(R.id.vImageRoot)
         FrameLayout vImageRoot;
 
@@ -230,13 +201,5 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             this.likesCount = likesCount;
             this.isLiked = isLiked;
         }
-    }
-
-    public interface OnFeedItemClickListener {
-        void onCommentsClick(View v, int position);
-
-        void onMoreClick(View v, int position);
-
-        void onProfileClick(View v);
     }
 }
