@@ -17,10 +17,6 @@ public class BaseActivity extends AppCompatActivity {
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 
-    @Nullable
-    @BindView(R.id.ivLogo)
-    ImageView ivLogo;
-
     @Override
     public void setContentView(int layoutResID) {
         super.setContentView(layoutResID);
@@ -44,9 +40,5 @@ public class BaseActivity extends AppCompatActivity {
 
     public Toolbar getToolbar() {
         return toolbar;
-    }
-
-    public ImageView getIvLogo() {
-        return ivLogo;
     }
 }

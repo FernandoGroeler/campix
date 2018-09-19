@@ -9,11 +9,10 @@
     app:layout_scrollFlags="scroll|enterAlways"
     app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
-    <ImageView
-        android:id="@+id/ivLogo"
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:scaleType="center"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="CamPix"
         android:src="@drawable/img_toolbar_logo" />
 </android.support.v7.widget.Toolbar>
