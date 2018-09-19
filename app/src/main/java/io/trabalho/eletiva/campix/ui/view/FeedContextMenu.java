@@ -13,6 +13,10 @@ import io.trabalho.eletiva.campix.Utils;
 public class FeedContextMenu extends LinearLayout {
     private static final int CONTEXT_MENU_WIDTH = Utils.dpToPx(240);
 
+    private int feedItem = -1;
+
+    private OnFeedContextMenuItemClickListener onItemClickListener;
+
     public FeedContextMenu(Context context) {
         super(context);
         init();
@@ -25,6 +29,10 @@ public class FeedContextMenu extends LinearLayout {
         setLayoutParams(new LayoutParams(CONTEXT_MENU_WIDTH, ViewGroup.LayoutParams.WRAP_CONTENT));
     }
 
+    public void bindToItem(int feedItem) {
+        this.feedItem = feedItem;
+    }
+
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
@@ -35,4 +43,45 @@ public class FeedContextMenu extends LinearLayout {
         ((ViewGroup) getParent()).removeView(FeedContextMenu.this);
     }
 
+    @OnClick(R.id.btnReport)
+    public void onReportClick() {
+        if (onItemClickListener != null) {
+            onItemClickListener.onReportClick(feedItem);
+        }
+    }
+
+    @OnClick(R.id.btnSharePhoto)
+    public void onSharePhotoClick() {
+        if (onItemClickListener != null) {
+            onItemClickListener.onSharePhotoClick(feedItem);
+        }
+    }
+
+    @OnClick(R.id.btnCopyShareUrl)
+    public void onCopyShareUrlClick() {
+        if (onItemClickListener != null) {
+            onItemClickListener.onCopyShareUrlClick(feedItem);
+        }
+    }
+
+    @OnClick(R.id.btnCancel)
+    public void onCancelClick() {
+        if (onItemClickListener != null) {
+            onItemClickListener.onCancelClick(feedItem);
+        }
+    }
+
+    public void setOnFeedMenuItemClickListener(OnFeedContextMenuItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
+    }
+
+    public interface OnFeedContextMenuItemClickListener {
+        public void onReportClick(int feedItem);
+
+        public void onSharePhotoClick(int feedItem);
+
+        public void onCopyShareUrlClick(int feedItem);
+
+        public void onCancelClick(int feedItem);
+    }
 }
