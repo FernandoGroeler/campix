@@ -9,6 +9,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
+import android.view.View;
 import android.view.animation.OvershootInterpolator;
 
 import butterknife.BindView;
@@ -18,7 +19,6 @@ import io.trabalho.eletiva.campix.Utils;
 import io.trabalho.eletiva.campix.ui.adapter.FeedAdapter;
 import io.trabalho.eletiva.campix.ui.adapter.FeedItemAnimator;
 import io.trabalho.eletiva.campix.ui.view.FeedContextMenuManager;
-
 
 public class MainActivity extends BaseDrawerActivity {
     public static final String ACTION_SHOW_LOADING_ITEM = "action_show_loading_item";
@@ -61,12 +61,14 @@ public class MainActivity extends BaseDrawerActivity {
 
         feedAdapter = new FeedAdapter(this);
         rvFeed.setAdapter(feedAdapter);
+
         rvFeed.setOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 FeedContextMenuManager.getInstance().onScrolled(recyclerView, dx, dy);
             }
         });
+
         rvFeed.setItemAnimator(new FeedItemAnimator());
     }
 
