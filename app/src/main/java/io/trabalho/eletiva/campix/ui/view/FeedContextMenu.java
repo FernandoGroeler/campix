@@ -19,7 +19,6 @@ public class FeedContextMenu extends LinearLayout {
     }
 
     private void init() {
-        LayoutInflater.from(getContext()).inflate(R.layout.view_context_menu, this, true);
         setBackgroundResource(R.drawable.bg_container_shadow);
         setOrientation(VERTICAL);
         setLayoutParams(new LayoutParams(CONTEXT_MENU_WIDTH, ViewGroup.LayoutParams.WRAP_CONTENT));

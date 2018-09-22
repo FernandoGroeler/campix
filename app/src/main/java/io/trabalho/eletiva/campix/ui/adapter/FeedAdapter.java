@@ -1,6 +1,7 @@
 package io.trabalho.eletiva.campix.ui.adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -69,6 +70,7 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 }
             }
         });
+
         cellFeedViewHolder.btnLike.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -99,6 +101,7 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 notifyItemChanged(0);
             }
         });
+
         holder.loadingFeedItemView.startLoading();
     }
 
@@ -118,6 +121,7 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     public void updateItems(boolean animated) {
         feedItems.clear();
+        /* todo:
         feedItems.addAll(Arrays.asList(
                 new FeedItem(33, false),
                 new FeedItem(1, false),
@@ -127,6 +131,8 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 new FeedItem(8, false),
                 new FeedItem(99, false)
         ));
+        */
+
         if (animated) {
             notifyItemRangeInserted(0, feedItems.size());
         } else {
@@ -164,7 +170,9 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         public void bindView(FeedItem feedItem) {
             this.feedItem = feedItem;
+
             int adapterPosition = getAdapterPosition();
+
             ivFeedCenter.setImageResource(adapterPosition % 2 == 0 ? R.drawable.img_feed_center_1 : R.drawable.img_feed_center_2);
             ivFeedBottom.setImageResource(adapterPosition % 2 == 0 ? R.drawable.img_feed_bottom_1 : R.drawable.img_feed_bottom_2);
             btnLike.setImageResource(feedItem.isLiked ? R.drawable.ic_heart_red : R.drawable.ic_heart_outline_grey);
@@ -179,7 +187,6 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
     public static class LoadingCellFeedViewHolder extends CellFeedViewHolder {
-
         LoadingFeedItemView loadingFeedItemView;
 
         public LoadingCellFeedViewHolder(LoadingFeedItemView view) {
@@ -194,10 +201,12 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
     public static class FeedItem {
+        public byte[] image;
         public int likesCount;
         public boolean isLiked;
 
-        public FeedItem(int likesCount, boolean isLiked) {
+        public FeedItem(byte[] image, int likesCount, boolean isLiked) {
+            this.image = image;
             this.likesCount = likesCount;
             this.isLiked = isLiked;
         }

@@ -3,7 +3,12 @@ package io.trabalho.eletiva.campix.ui.database;
 public class Feed {
     private int id;
     private byte[] image;
-    private int likes;
+    private int likesCount;
+
+    public Feed(byte[] image, int likesCount) {
+        this.image = image;
+        this.likesCount = likesCount;
+    }
 
     public int getId() {
         return id;
@@ -21,11 +26,11 @@ public class Feed {
         this.image = image;
     }
 
-    public int getLikes() {
-        return likes;
+    public int getLikesCount() {
+        return likesCount;
     }
 
-    public void setLikes(int likes) {
-        this.likes = likes;
+    public void setLikesCount(int likesCount) {
+        this.likesCount = likesCount;
     }
 }

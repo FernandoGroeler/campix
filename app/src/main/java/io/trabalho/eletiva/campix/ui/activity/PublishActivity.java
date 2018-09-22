@@ -1,10 +1,8 @@
 package io.trabalho.eletiva.campix.ui.activity;
 
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,7 +17,6 @@ import com.squareup.picasso.Picasso;
 import butterknife.BindView;
 import butterknife.OnCheckedChanged;
 import io.trabalho.eletiva.campix.R;
-import io.trabalho.eletiva.campix.Utils;
 
 public class PublishActivity extends BaseActivity {
     public static final String ARG_TAKEN_PHOTO_URI = "arg_taken_photo_uri";
@@ -53,11 +50,11 @@ public class PublishActivity extends BaseActivity {
         } else {
             photoUri = savedInstanceState.getParcelable(ARG_TAKEN_PHOTO_URI);
         }
-        updateStatusBarColor();
 
         ivPhoto.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
             @Override
             public boolean onPreDraw() {
+                System.out.print("teste");
                 ivPhoto.getViewTreeObserver().removeOnPreDrawListener(this);
                 loadThumbnailPhoto();
                 return true;
@@ -65,16 +62,10 @@ public class PublishActivity extends BaseActivity {
         });
     }
 
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    private void updateStatusBarColor() {
-        if (Utils.isAndroid5()) {
-            getWindow().setStatusBarColor(0xff888888);
-        }
-    }
-
     private void loadThumbnailPhoto() {
         ivPhoto.setScaleX(0);
         ivPhoto.setScaleY(0);
+
         Picasso.with(this)
                 .load(photoUri)
                 .centerCrop()

@@ -9,9 +9,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
-import android.view.View;
 import android.view.animation.OvershootInterpolator;
-
 import butterknife.BindView;
 import butterknife.OnClick;
 import io.trabalho.eletiva.campix.R;
@@ -136,5 +134,4 @@ public class MainActivity extends BaseDrawerActivity {
     public void showLikedSnackbar() {
         Snackbar.make(clContent, "Liked!", Snackbar.LENGTH_SHORT).show();
     }
-
 }

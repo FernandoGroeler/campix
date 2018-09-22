@@ -1,20 +1,20 @@
 package io.trabalho.eletiva.campix.ui.activity;
 
+import android.Manifest;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.hardware.Camera;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewTreeObserver;
@@ -36,8 +36,7 @@ import java.io.File;
 import butterknife.BindView;
 import butterknife.OnClick;
 import io.trabalho.eletiva.campix.R;
-import io.trabalho.eletiva.campix.Utils;
-import io.trabalho.eletiva.campix.ui.adapter.PhotoFiltersAdapter;
+
 import io.trabalho.eletiva.campix.ui.view.RevealBackgroundView;
 
 public class TakePhotoActivity extends BaseActivity implements RevealBackgroundView.OnStateChangeListener,
@@ -73,6 +72,14 @@ public class TakePhotoActivity extends BaseActivity implements RevealBackgroundV
 
     private File photoPath;
 
+    private void getPermissions() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED
+                || ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
+                || ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
+        }
+    }
+
     public static void startCameraFromLocation(int[] startingLocation, Activity startingActivity) {
         Intent intent = new Intent(startingActivity, TakePhotoActivity.class);
         intent.putExtra(ARG_REVEAL_START_LOCATION, startingLocation);
@@ -82,11 +89,12 @@ public class TakePhotoActivity extends BaseActivity implements RevealBackgroundV
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_take_photo);
-        updateStatusBarColor();
+
         updateState(STATE_TAKE_PHOTO);
         setupRevealBackground(savedInstanceState);
-        setupPhotoFilters();
+        getPermissions();
 
         vUpperPanel.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
             @Override
@@ -100,16 +108,10 @@ public class TakePhotoActivity extends BaseActivity implements RevealBackgroundV
         });
     }
 
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    private void updateStatusBarColor() {
-        if (Utils.isAndroid5()) {
-            getWindow().setStatusBarColor(0xff111111);
-        }
-    }
-
     private void setupRevealBackground(Bundle savedInstanceState) {
         vRevealBackground.setFillPaintColor(0xFF16181a);
         vRevealBackground.setOnStateChangeListener(this);
+
         if (savedInstanceState == null) {
             final int[] startingLocation = getIntent().getIntArrayExtra(ARG_REVEAL_START_LOCATION);
             vRevealBackground.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
@@ -123,13 +125,6 @@ public class TakePhotoActivity extends BaseActivity implements RevealBackgroundV
         } else {
             vRevealBackground.setToFinishedFrame();
         }
-    }
-
-    private void setupPhotoFilters() {
-        PhotoFiltersAdapter photoFiltersAdapter = new PhotoFiltersAdapter(this);
-        rvFilters.setHasFixedSize(true);
-        rvFilters.setAdapter(photoFiltersAdapter);
-        rvFilters.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
     }
 
     @Override
@@ -270,6 +265,7 @@ public class TakePhotoActivity extends BaseActivity implements RevealBackgroundV
             vLowerPanel.setInAnimation(this, R.anim.slide_in_from_right);
             vUpperPanel.setOutAnimation(this, R.anim.slide_out_to_left);
             vLowerPanel.setOutAnimation(this, R.anim.slide_out_to_left);
+
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
