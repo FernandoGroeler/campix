@@ -2,6 +2,7 @@ package io.trabalho.eletiva.campix.ui.adapter;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -20,6 +21,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.trabalho.eletiva.campix.R;
 import io.trabalho.eletiva.campix.ui.activity.MainActivity;
+import io.trabalho.eletiva.campix.ui.database.DatabaseController;
+import io.trabalho.eletiva.campix.ui.database.Feed;
 import io.trabalho.eletiva.campix.ui.view.LoadingFeedItemView;
 
 public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -29,7 +32,7 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public static final int VIEW_TYPE_DEFAULT = 1;
     public static final int VIEW_TYPE_LOADER = 2;
 
-    private final List<FeedItem> feedItems = new ArrayList<>();
+    private List<Feed> feedItems = new ArrayList<>();
 
     private Context context;
 
@@ -37,10 +40,13 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     public FeedAdapter(Context context) {
         this.context = context;
+        DatabaseController dbc = new DatabaseController(this.context);
+        this.feedItems = dbc.selectAllData();
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+
         if (viewType == VIEW_TYPE_DEFAULT) {
             View view = LayoutInflater.from(context).inflate(R.layout.item_feed, parent, false);
             CellFeedViewHolder cellFeedViewHolder = new CellFeedViewHolder(view);
@@ -54,7 +60,6 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             );
             return new LoadingCellFeedViewHolder(view);
         }
-
         return null;
     }
 
@@ -63,7 +68,7 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             @Override
             public void onClick(View v) {
                 int adapterPosition = cellFeedViewHolder.getAdapterPosition();
-                feedItems.get(adapterPosition).likesCount++;
+                feedItems.get(adapterPosition).getLikesCount();
                 notifyItemChanged(adapterPosition, ACTION_LIKE_IMAGE_CLICKED);
                 if (context instanceof MainActivity) {
                     ((MainActivity) context).showLikedSnackbar();
@@ -75,7 +80,7 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             @Override
             public void onClick(View v) {
                 int adapterPosition = cellFeedViewHolder.getAdapterPosition();
-                feedItems.get(adapterPosition).likesCount++;
+                feedItems.get(adapterPosition).getLikesCount();
                 notifyItemChanged(adapterPosition, ACTION_LIKE_BUTTON_CLICKED);
                 if (context instanceof MainActivity) {
                     ((MainActivity) context).showLikedSnackbar();
@@ -121,17 +126,7 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     public void updateItems(boolean animated) {
         feedItems.clear();
-        /* todo:
-        feedItems.addAll(Arrays.asList(
-                new FeedItem(33, false),
-                new FeedItem(1, false),
-                new FeedItem(223, false),
-                new FeedItem(2, false),
-                new FeedItem(6, false),
-                new FeedItem(8, false),
-                new FeedItem(99, false)
-        ));
-        */
+        feedItems.addAll(feedItems);
 
         if (animated) {
             notifyItemRangeInserted(0, feedItems.size());
@@ -161,27 +156,28 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         @BindView(R.id.vImageRoot)
         FrameLayout vImageRoot;
 
-        FeedItem feedItem;
+        Feed feedItem;
 
         public CellFeedViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
         }
 
-        public void bindView(FeedItem feedItem) {
+        public void bindView(Feed feedItem) {
             this.feedItem = feedItem;
 
             int adapterPosition = getAdapterPosition();
 
-            ivFeedCenter.setImageResource(adapterPosition % 2 == 0 ? R.drawable.img_feed_center_1 : R.drawable.img_feed_center_2);
+            Bitmap raw  = BitmapFactory.decodeByteArray(feedItem.getImage(),0,feedItem.getImage().length);
+            ivFeedCenter.setImageBitmap(raw);
             ivFeedBottom.setImageResource(adapterPosition % 2 == 0 ? R.drawable.img_feed_bottom_1 : R.drawable.img_feed_bottom_2);
-            btnLike.setImageResource(feedItem.isLiked ? R.drawable.ic_heart_red : R.drawable.ic_heart_outline_grey);
+            btnLike.setImageResource(R.drawable.ic_heart_red);
             tsLikesCounter.setCurrentText(vImageRoot.getResources().getQuantityString(
-                    R.plurals.likes_count, feedItem.likesCount, feedItem.likesCount
+                    R.plurals.likes_count, feedItem.getLikesCount(), feedItem.getLikesCount()
             ));
         }
 
-        public FeedItem getFeedItem() {
+        public Feed getFeedItem() {
             return feedItem;
         }
     }
@@ -195,7 +191,7 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
 
         @Override
-        public void bindView(FeedItem feedItem) {
+        public void bindView(Feed feedItem) {
             super.bindView(feedItem);
         }
     }

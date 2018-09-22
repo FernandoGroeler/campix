@@ -13,6 +13,5 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="CamPix"
-        android:src="@drawable/img_toolbar_logo" />
+        android:text="CamPix"/>
 </android.support.v7.widget.Toolbar>

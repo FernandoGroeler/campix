@@ -92,7 +92,7 @@ public class FeedItemAnimator extends DefaultItemAnimator {
             FeedAdapter.CellFeedViewHolder holder = (FeedAdapter.CellFeedViewHolder) newHolder;
 
             animateHeartButton(holder);
-            updateLikesCounter(holder, holder.getFeedItem().likesCount);
+            updateLikesCounter(holder, holder.getFeedItem().getLikesCount());
             if (FeedAdapter.ACTION_LIKE_IMAGE_CLICKED.equals(feedItemHolderInfo.updateAction)) {
                 animatePhotoLike(holder);
             }

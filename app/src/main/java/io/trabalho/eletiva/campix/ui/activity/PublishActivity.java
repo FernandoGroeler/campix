@@ -2,12 +2,16 @@ package io.trabalho.eletiva.campix.ui.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.animation.OvershootInterpolator;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ToggleButton;
 
@@ -17,16 +21,17 @@ import com.squareup.picasso.Picasso;
 import butterknife.BindView;
 import butterknife.OnCheckedChanged;
 import io.trabalho.eletiva.campix.R;
+import io.trabalho.eletiva.campix.ui.database.DatabaseController;
 
 public class PublishActivity extends BaseActivity {
     public static final String ARG_TAKEN_PHOTO_URI = "arg_taken_photo_uri";
 
     @BindView(R.id.tbFollowers)
     ToggleButton tbFollowers;
-    @BindView(R.id.tbDirect)
-    ToggleButton tbDirect;
     @BindView(R.id.ivPhoto)
     ImageView ivPhoto;
+    @BindView(R.id.btnPublish)
+    Button btnPublish;
 
     private boolean propagatingToggleState = false;
     private Uri photoUri;
@@ -58,6 +63,15 @@ public class PublishActivity extends BaseActivity {
                 ivPhoto.getViewTreeObserver().removeOnPreDrawListener(this);
                 loadThumbnailPhoto();
                 return true;
+            }
+        });
+
+        btnPublish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bitmap bm = ((BitmapDrawable) ivPhoto.getDrawable()).getBitmap();
+                DatabaseController dbc = new DatabaseController(getApplicationContext());
+                dbc.insertData(bm, 0);
             }
         });
     }
@@ -116,21 +130,4 @@ public class PublishActivity extends BaseActivity {
         outState.putParcelable(ARG_TAKEN_PHOTO_URI, photoUri);
     }
 
-    @OnCheckedChanged(R.id.tbFollowers)
-    public void onFollowersCheckedChange(boolean checked) {
-        if (!propagatingToggleState) {
-            propagatingToggleState = true;
-            tbDirect.setChecked(!checked);
-            propagatingToggleState = false;
-        }
-    }
-
-    @OnCheckedChanged(R.id.tbDirect)
-    public void onDirectCheckedChange(boolean checked) {
-        if (!propagatingToggleState) {
-            propagatingToggleState = true;
-            tbFollowers.setChecked(!checked);
-            propagatingToggleState = false;
-        }
-    }
 }

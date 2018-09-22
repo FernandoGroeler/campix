@@ -9,7 +9,7 @@ public class CreateDatabase extends SQLiteOpenHelper {
     private static final int VERSION = 1;
 
     public static final String IMAGE = "image";
-    public static final String LIKESCOUNT = "likescount";
+    public static final String LIKESCOUNT = "likes";
     public static final String TABLE = "feed";
 
     public CreateDatabase(Context context) {

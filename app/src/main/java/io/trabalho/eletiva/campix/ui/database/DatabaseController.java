@@ -41,11 +41,11 @@ public class DatabaseController {
     }
 
     public List<Feed> selectAllData() {
-        String sql = "select image, likescount from " + database.TABLE;
+        String sql = "select image, likes from " + database.TABLE;
 
         db = database.getWritableDatabase();
-        Cursor cur = db.rawQuery(sql, null);
 
+        Cursor cur = db.rawQuery(sql, null);
         List<Feed> feeds = new ArrayList<>();
 
         if (cur.moveToFirst()) {
