@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Point;
-import android.support.v4.app.ActivityCompat;
 import android.view.Display;
 import android.view.WindowManager;
 

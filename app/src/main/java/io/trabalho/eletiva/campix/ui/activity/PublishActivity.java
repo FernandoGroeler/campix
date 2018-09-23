@@ -6,28 +6,21 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.animation.OvershootInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ToggleButton;
-
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
-
 import butterknife.BindView;
-import butterknife.OnCheckedChanged;
 import io.trabalho.eletiva.campix.R;
 import io.trabalho.eletiva.campix.ui.database.DatabaseController;
 
 public class PublishActivity extends BaseActivity {
     public static final String ARG_TAKEN_PHOTO_URI = "arg_taken_photo_uri";
 
-    @BindView(R.id.tbFollowers)
-    ToggleButton tbFollowers;
     @BindView(R.id.ivPhoto)
     ImageView ivPhoto;
     @BindView(R.id.btnPublish)
@@ -103,26 +96,8 @@ public class PublishActivity extends BaseActivity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_publish, menu);
-        return true;
-    }
-
-    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.action_publish) {
-            bringMainActivityToTop();
-            return true;
-        } else {
-            return super.onOptionsItemSelected(item);
-        }
-    }
-
-    private void bringMainActivityToTop() {
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        intent.setAction(MainActivity.ACTION_SHOW_LOADING_ITEM);
-        startActivity(intent);
+         return super.onOptionsItemSelected(item);
     }
 
     @Override

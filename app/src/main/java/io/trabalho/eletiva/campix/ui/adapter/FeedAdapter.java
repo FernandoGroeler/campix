@@ -14,7 +14,6 @@ import android.widget.ImageView;
 import android.widget.TextSwitcher;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import butterknife.BindView;
@@ -166,11 +165,8 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         public void bindView(Feed feedItem) {
             this.feedItem = feedItem;
 
-            int adapterPosition = getAdapterPosition();
-
             Bitmap raw  = BitmapFactory.decodeByteArray(feedItem.getImage(),0,feedItem.getImage().length);
             ivFeedCenter.setImageBitmap(raw);
-            ivFeedBottom.setImageResource(adapterPosition % 2 == 0 ? R.drawable.img_feed_bottom_1 : R.drawable.img_feed_bottom_2);
             btnLike.setImageResource(R.drawable.ic_heart_red);
             tsLikesCounter.setCurrentText(vImageRoot.getResources().getQuantityString(
                     R.plurals.likes_count, feedItem.getLikesCount(), feedItem.getLikesCount()

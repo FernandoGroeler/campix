@@ -1,12 +1,10 @@
 package io.trabalho.eletiva.campix.ui.view;
 
 import android.content.Context;
-import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import io.trabalho.eletiva.campix.R;
 import io.trabalho.eletiva.campix.Utils;
 

@@ -3,13 +3,7 @@ package io.trabalho.eletiva.campix.ui.view;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.view.animation.AccelerateInterpolator;
-import android.view.animation.OvershootInterpolator;
-
-import io.trabalho.eletiva.campix.Utils;
 
 public class FeedContextMenuManager extends RecyclerView.OnScrollListener {
 

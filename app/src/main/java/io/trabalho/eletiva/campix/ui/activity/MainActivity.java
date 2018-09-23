@@ -10,17 +10,12 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.animation.OvershootInterpolator;
-
-import java.util.List;
-
 import butterknife.BindView;
 import butterknife.OnClick;
 import io.trabalho.eletiva.campix.R;
 import io.trabalho.eletiva.campix.Utils;
 import io.trabalho.eletiva.campix.ui.adapter.FeedAdapter;
 import io.trabalho.eletiva.campix.ui.adapter.FeedItemAnimator;
-import io.trabalho.eletiva.campix.ui.database.DatabaseController;
-import io.trabalho.eletiva.campix.ui.database.Feed;
 import io.trabalho.eletiva.campix.ui.view.FeedContextMenuManager;
 
 public class MainActivity extends BaseDrawerActivity {
