@@ -41,7 +41,7 @@ public class DatabaseController {
     }
 
     public List<Feed> selectAllData() {
-        String sql = "select image, likes from " + database.TABLE;
+        String sql = "select image, likes from " + database.TABLE + " order by _id desc";
 
         db = database.getWritableDatabase();
 

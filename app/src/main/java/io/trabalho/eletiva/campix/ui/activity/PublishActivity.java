@@ -33,7 +33,6 @@ public class PublishActivity extends BaseActivity {
     @BindView(R.id.btnPublish)
     Button btnPublish;
 
-    private boolean propagatingToggleState = false;
     private Uri photoUri;
     private int photoSize;
 
@@ -59,7 +58,6 @@ public class PublishActivity extends BaseActivity {
         ivPhoto.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
             @Override
             public boolean onPreDraw() {
-                System.out.print("teste");
                 ivPhoto.getViewTreeObserver().removeOnPreDrawListener(this);
                 loadThumbnailPhoto();
                 return true;
@@ -72,6 +70,7 @@ public class PublishActivity extends BaseActivity {
                 Bitmap bm = ((BitmapDrawable) ivPhoto.getDrawable()).getBitmap();
                 DatabaseController dbc = new DatabaseController(getApplicationContext());
                 dbc.insertData(bm, 0);
+
             }
         });
     }

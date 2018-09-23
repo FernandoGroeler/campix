@@ -109,7 +109,6 @@ public class MainActivity extends BaseDrawerActivity {
                 .setStartDelay(300)
                 .setDuration(ANIM_DURATION_FAB)
                 .start();
-        feedAdapter.updateItems(true);
     }
 
     private void startIntroAnimation() {
