@@ -70,7 +70,9 @@ public class PublishActivity extends BaseActivity {
                 Bitmap bm = ((BitmapDrawable) ivPhoto.getDrawable()).getBitmap();
                 DatabaseController dbc = new DatabaseController(getApplicationContext());
                 dbc.insertData(bm, 0);
-
+                Intent intent = new Intent(PublishActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
     }
