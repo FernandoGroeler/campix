@@ -20,7 +20,7 @@ public class DatabaseController {
         database = new CreateDatabase(context);
     }
 
-    public String insertData(Bitmap image, int likes) {
+    public String insertData(Bitmap image, int likescount) {
         ContentValues valores;
         long resultado;
         byte[] img = Utils.getBitmapAsByteArray(image);
@@ -28,7 +28,7 @@ public class DatabaseController {
         db = database.getWritableDatabase();
         valores = new ContentValues();
         valores.put(database.IMAGE, img);
-        valores.put(database.LIKESCOUNT, likes);
+        valores.put(database.LIKESCOUNT, likescount);
 
         resultado = db.insert(database.TABLE, null, valores);
         db.close();
@@ -41,7 +41,7 @@ public class DatabaseController {
     }
 
     public List<Feed> selectAllData() {
-        String sql = "select image, likes from " + database.TABLE + " order by _id desc";
+        String sql = "select " + database.IMAGE +  ", " + database.LIKESCOUNT + " from " + database.TABLE + " order by _id desc";
 
         db = database.getWritableDatabase();
 

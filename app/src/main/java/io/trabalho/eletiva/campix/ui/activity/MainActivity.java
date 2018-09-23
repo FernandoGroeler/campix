@@ -44,7 +44,9 @@ public class MainActivity extends BaseDrawerActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         setupFeed();
+
         if (savedInstanceState == null) {
             pendingIntroAnimation = true;
         } else {

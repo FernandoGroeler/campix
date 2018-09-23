@@ -6,10 +6,10 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class CreateDatabase extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "campix.db";
-    private static final int VERSION = 1;
+    private static final int VERSION = 5;
 
     public static final String IMAGE = "image";
-    public static final String LIKESCOUNT = "likes";
+    public static final String LIKESCOUNT = "likescount";
     public static final String TABLE = "feed";
 
     public CreateDatabase(Context context) {
@@ -20,8 +20,8 @@ public class CreateDatabase extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         String sql = "CREATE TABLE " +
                 TABLE + " (_id integer primary key autoincrement, " +
-                IMAGE + "blob, " +
-                LIKESCOUNT + "integer) ";
+                IMAGE + " blob, " +
+                LIKESCOUNT + " integer) ";
 
         db.execSQL(sql);
      }
